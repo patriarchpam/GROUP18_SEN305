@@ -3,38 +3,164 @@
 <head>
 <title>Student Bio Data</title>
 <style>
-  body { font-family: Arial; background: #eee; }
-  form { width: 300px; margin: 30px auto; padding: 20px; background: white; }
-  input, select { width: 100%; margin-bottom: 10px; padding: 6px; }
-  button { background: blue; color: white; padding: 8px; }
+  body {
+    font-family: Arial;
+    background: #f0f2f5;
+  }
+  form {
+    width: 350px;
+    margin: 30px auto;
+    padding: 25px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  h3 {
+    text-align: center;
+    color: #1a3c8f;
+  }
+  h4 {
+    background: #e8eefc;
+    padding: 6px;
+    margin-top: 20px;
+    color: #1a3c8f;
+  }
+  label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+  input, select, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  button {
+    width: 100%;
+    background: #1a3c8f;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+  }
 </style>
 </head>
 <body>
 <form onsubmit="return check()">
   <h3>Student Bio Data</h3>
-  Name: <input type="text" id="name">
-  Email: <input type="text" id="email">
-  Age: <input type="number" id="age">
-  Gender:
-  <select id="gender">
+<h5 style="color: red;font-style: italic;"> Please fill in all required fields *</h5>
+  <h4>Personal Details</h4>
+  <label>Name *</label>
+  <input type="text" id="name" required>
+
+  <label>Email *</label>
+  <input type="text" id="email" required>
+
+  <label>Age *</label>
+  <input type="number" id="age" required>
+
+  <label>Gender *</label>
+  <select id="gender" required>
     <option value="">Select</option>
     <option>Male</option>
     <option>Female</option>
   </select>
+
+  <label>Date of Birth *</label>
+  <input type="date" id="dob" required>
+
+  <label>Phone *</label>
+  <input type="text" id="phone" required>
+
+  <label>State of Origin *</label>
+  <input type="text" id="state" required>
+
+  <label>Address *</label>
+  <textarea id="address" rows="3" required></textarea>
+
+  <h4>Academic Details</h4>
+  <label>Matric Number *</label>
+  <input type="text" id="matric" required>
+
+  <label>Department *</label>
+  <select id="department" required>
+    <option value="">Select</option>
+    <option>Computer Science</option>
+    <option>Software Engineering</option>
+    <option>Information Technology</option>
+    <option>Cyber Security</option>
+    <option>Mathematics</option>
+    <option>Physics</option>
+    <option>Accounting</option>
+    <option>Business Administration</option>
+    <option>Economics</option>
+    <option>Mass Communication</option>
+    <option>History</option>
+    <option>Law</option>
+    <option>Nursing</option>
+    <option>Pharmacy</option>
+    <option>Other</option>
+  </select>
+
+  <label>Level *</label>
+  <select id="level" required>
+    <option value="">Select</option>
+    <option>100</option>
+    <option>200</option>
+    <option>300</option>
+    <option>400</option>
+    <option>500</option>
+    <option>600</option>
+  </select>
+
+  <h4>Next of Kin</h4>
+  <label>Name *</label>
+  <input type="text" id="kinName" required>
+
+  <label>Phone *</label>
+  <input type="text" id="kinPhone" required>
+
   <button type="submit">Submit</button>
 </form>
-
 <script>
 function check() {
   var name = document.getElementById("name").value;
   var email = document.getElementById("email").value;
   var age = document.getElementById("age").value;
   var gender = document.getElementById("gender").value;
+  var dob = document.getElementById("dob").value;
+  var phone = document.getElementById("phone").value;
+  var state = document.getElementById("state").value;
+  var address = document.getElementById("address").value;
+  var matric = document.getElementById("matric").value;
+  var department = document.getElementById("department").value;
+  var level = document.getElementById("level").value;
+  var kinName = document.getElementById("kinName").value;
+  var kinPhone = document.getElementById("kinPhone").value;
 
   if (name == "") { alert("Enter your name"); return false; }
   if (email.indexOf("@") == -1) { alert("Enter a valid email"); return false; }
   if (age < 15 || age > 60) { alert("Age must be 15 to 60"); return false; }
   if (gender == "") { alert("Select gender"); return false; }
+  if (dob == "") { alert("Select date of birth"); return false; }
+  if (phone.length < 10 || isNaN(phone)) { alert("Enter a valid phone number"); return false; }
+  if (state == "") { alert("Enter state of origin"); return false; }
+  if (address == "") { alert("Enter your address"); return false; }
+  if (matric == "") { alert("Enter matric number"); return false; }
+  if (department == "") { alert("Select your department"); return false; }
+  if (level == "") { alert("Select your level"); return false; }
+  if (kinName == "") { alert("Enter next of kin name"); return false; }
+  if (kinPhone.length < 10 || isNaN(kinPhone)) { alert("Enter a valid next of kin phone"); return false; }
+
+  var student = { name: name, email: email, age: age, gender: gender,
+    dob: dob, phone: phone, state: state, address: address,
+    matric: matric, department: department, level: level,
+    kinName: kinName, kinPhone: kinPhone };
+  localStorage.setItem("student", JSON.stringify(student));
 
   alert("Form submitted successfully");
   return true;
