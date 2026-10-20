@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Student Bio Data</title>
+<style>
+  body { font-family: Arial; background: #eee; }
+  form { width: 300px; margin: 30px auto; padding: 20px; background: white; }
+  input, select { width: 100%; margin-bottom: 10px; padding: 6px; }
+  button { background: blue; color: white; padding: 8px; }
+</style>
+</head>
+<body>
+<form onsubmit="return check()">
+  <h3>Student Bio Data</h3>
+  Name: <input type="text" id="name">
+  Email: <input type="text" id="email">
+  Age: <input type="number" id="age">
+  Gender:
+  <select id="gender">
+    <option value="">Select</option>
+    <option>Male</option>
+    <option>Female</option>
+  </select>
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+function check() {
+  var name = document.getElementById("name").value;
+  var email = document.getElementById("email").value;
+  var age = document.getElementById("age").value;
+  var gender = document.getElementById("gender").value;
+
+  if (name == "") { alert("Enter your name"); return false; }
+  if (email.indexOf("@") == -1) { alert("Enter a valid email"); return false; }
+  if (age < 15 || age > 60) { alert("Age must be 15 to 60"); return false; }
+  if (gender == "") { alert("Select gender"); return false; }
+
+  alert("Form submitted successfully");
+  return true;
+}
+</script>
+</body>
+</html>
